@@ -10,4 +10,7 @@ def about_views(request):
 def contact_views(request):
     return render(request,'website/contact.html')
 
+def test_views(requests):
+    contex = {'title': 'my name is mhmd babaie and im working in izbank', 'edu':'my education is software engineering'}
+    return render(requests,'website/test.html',contex)
 
