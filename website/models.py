@@ -2,7 +2,7 @@ import email
 from django.db import models
 
 # Create your models here.
-
+                                                                                
 
 class contact(models.Model):
     name = models.CharField(max_length=50)
@@ -16,3 +16,4 @@ class contact(models.Model):
 
     def __str__(self):
         return self.name
+        

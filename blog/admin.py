@@ -8,5 +8,5 @@ class PostAdmin(admin.ModelAdmin):
     empty_value_display = 'empty'
     list_display = ('title','counted_views','status','published_date')
     list_filter = ['status']
-    search_fields = ('title','content')
+    search_fields = ('title','content') 
 admin.site.register(Post,PostAdmin)
