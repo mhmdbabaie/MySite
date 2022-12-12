@@ -10,14 +10,7 @@
 
     <form action="{% url 'website:test' %}" method="post">
         {% csrf_token %}
-        <label> name: </label>
-        <input name="name" type="text"><br><br>
-        <label> email: </label>
-        <input name="email" type="email"><br><br>
-        <label> subject: </label>
-        <input name="subject" type="text"><br><br>
-        <label> message: </label>
-        <input name="message" type="text"><br><br>
+        {{form.as_p}}
         <button type="submit">submit</button>
     </form>
 
