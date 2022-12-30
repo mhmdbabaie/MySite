@@ -134,13 +134,14 @@
                             output.
                         </p>
                         <div id="mc_embed_signup">
-                            <form target="_blank"
-                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                method="get" class="subscription relative">
+                            <form
+                                action="{% url 'website:newsletter' %}"
+                                method="post" class="subscription relative">
+                                {% csrf_token %}
                                 <div class="input-group d-flex flex-row">
-                                    <input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''"
+                                    <input name="email" placeholder="Email Address" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'Email Address '" required="" type="email">
-                                    <button class="btn bb-btn"><span class="lnr lnr-location"></span></button>
+                                    <button class="btn bb-btn" type='submit'><span class="lnr lnr-location"></span></button>
                                 </div>
                                 <div class="mt-10 info"></div>
                             </form>
@@ -153,7 +154,7 @@
                         <ul class="instafeed d-flex flex-wrap">
                             <li><img src="{% static 'img/i1.jpg'%}" alt=""></li>
                             <li><img src="{% static 'img/i2.jpg'%}" alt=""></li>
-                            <li><img src="{% static 'img/i3.jpg'%}" alt=""></li>
+                            <li><img src="{% static 'img/i3.jpg'%}" alt=""></li> 
                             <li><img src="{% static 'img/i4.jpg'%}" alt=""></li>
                             <li><img src="{% static 'img/i5.jpg'%}" alt=""></li>
                             <li><img src="{% static 'img/i6.jpg'%}" alt=""></li>

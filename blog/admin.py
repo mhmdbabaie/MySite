@@ -10,4 +10,4 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('status','author')
     search_fields = ['title','content']
 admin.site.register(Category)
-admin.site.register(Post,PostAdmin)
+admin.site.register(Post,PostAdmin)   
