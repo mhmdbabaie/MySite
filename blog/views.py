@@ -1,17 +1,18 @@
 from django.shortcuts import render , get_object_or_404
-from blog.models import Post 
-from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger,PageNotAnInteger
+from blog.models import Post,Comments 
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 
-
-
-def blog_view(requests,cat_name=None,author_username = None):
+def blog_view(requests,cat_name=None,author_username = None,**kwargs):
     posts = Post.objects.filter(status=1)
     if  cat_name:
         posts = Post.objects.filter(category_name=cat_name)
     if author_username:
         posts = Post.objects.filter(author__username=author_username)
-    
+    if kwargs.get('tag_name')!=None :
+        pass
+       # posts = Post.filter(author_username= kwargs['author_username'])
+
     posts = Paginator(posts,3)
     try:
         page_number =requests.GET.get('page')
@@ -26,12 +27,10 @@ def blog_view(requests,cat_name=None,author_username = None):
 
 
 
-    
-
-
 def blog_single(requests,pid):
     post = get_object_or_404(Post, pk=pid,status=1)
-    context = {'post': post}
+    comments = Comments.objects.filter(post=post.id,approach= True)
+    context = {'post': post , 'comments': comments}
     return render(requests,'blog/blog-single.html',context)
  
 def test(requests,pid):
