@@ -25,6 +25,7 @@ class Post(models.Model):
     published_date = models.DateTimeField(null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+
     class Meta:
         ordering = ['-created_date']
 
@@ -40,7 +41,7 @@ class Comments(models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=255)
     meesage = models.TextField()
-    approach = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now_add=True)
 

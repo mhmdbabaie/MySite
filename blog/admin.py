@@ -15,8 +15,8 @@ class PostAdmin(SummernoteModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_date'
     empty_value_display = '-empty-'
-    list_display = ('name','post','approach','created_date')
-    list_filter = ('post','approach')
+    list_display = ('name','post','approved','created_date')
+    list_filter = ('post','approved')
     search_fields = ['name','post']
 
 admin.site.register(Comments,CommentAdmin)
