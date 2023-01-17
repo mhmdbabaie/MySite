@@ -42,12 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'debug_toolbar',
-  
+
+    'captcha',
     'taggit',
     'robots',
     'django_summernote',
     'blog',
-    'captcha',
+    'accounts',
+   
 ]
 SITE_ID = 3
 SUMMERNOTE_THEME = 'bs4'  
