@@ -7,7 +7,7 @@ from django_summernote.admin import SummernoteModelAdmin
 class PostAdmin(SummernoteModelAdmin):
     date_hierarchy = 'created_date'
     empty_value_display = 'empty'
-    list_display = ('title','author','counted_views','status','published_date')
+    list_display = ('title','author','counted_views','login_required','status','published_date')
     list_filter = ('status','author')
     summernote_fields = ('content')
     search_fields = ['title','content']
@@ -21,4 +21,5 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Comments,CommentAdmin)
 admin.site.register(Category)
-admin.site.register(Post,PostAdmin)        
+admin.site.register(Post,PostAdmin)
+        

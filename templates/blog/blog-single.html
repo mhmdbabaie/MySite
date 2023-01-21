@@ -44,11 +44,13 @@
 							<p class="user-name col-lg-12 col-md-12 col-6"><a href="#">{{post.author.get_full_name}}</a>
 								<span class="lnr lnr-user"></span>
 							</p>
-							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{post.published_date|date:"d M Y"}}</a> <span class="lnr lnr-calendar-full"></span></p>
+							<p class="date col-lg-12 col-md-12 col-6"><a href="#">{{post.published_date|date:"d M
+									Y"}}</a> <span class="lnr lnr-calendar-full"></span></p>
 							<p class="view col-lg-12 col-md-12 col-6"><a href="#">{{post.counted_views}}</a> <span
 									class="lnr lnr-eye"></span></p>
-							<p class="comments col-lg-12 col-md-12 col-6"><a href="#">{{comments|length}} Comments</a> <span
-									class="lnr lnr-bubble"></span></p>
+							<p class="comments col-lg-12 col-md-12 col-6"><a href="#">{{comments|length}} Comments</a>
+								<span class="lnr lnr-bubble"></span>
+							</p>
 							<ul class="social-links col-lg-12 col-md-12 col-6">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -62,7 +64,7 @@
 						<p class="excert">
 							{{post.content|safe}}
 						</p>
-					</div>
+					</div>	
 				</div>
 				<div class="navigation-area">
 					<div class="row">
@@ -127,9 +129,9 @@
 				</div>
 			    -->
 				<div class="comments-area">
-					 <h4> {{comments|length}} Comments  </h4>
+					<h4> {{comments|length}} Comments </h4>
 					<div class="comment-list">
-					{% for comment in comments %}
+						{% for comment in comments %}
 						<div class="single-comment justify-content-between d-flex">
 							<div class="user justify-content-between d-flex">
 								<div class="thumb">
@@ -151,8 +153,8 @@
 						</div>
 						{% empty %}
 						<p> No Comments Here </p>
-					{% endfor %}
-				</div>
+						{% endfor %}
+					</div>
 				</div>
 				<div class="comment-form">
 					<h4>Leave a Comment</h4>
@@ -160,6 +162,10 @@
 						{% csrf_token %}
 
 						<input type="hidden" name="post" value={{post.id}}>
+						{% if request.user.is_authenticated %}
+						<input type="hidden" name="name" value={{request.user.first_name}}>
+						<input type="hidden" name="email" value={{request.user.email}}>
+						{% else %}
 						<div class="form-group form-inline">
 							<div class="form-group col-lg-6 col-md-12 name">
 								<input type="text" class="form-control" name="name" placeholder="Enter Name"
@@ -170,6 +176,7 @@
 									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
 							</div>
 						</div>
+						{% endif %}
 						<div class="form-group">
 							<input type="text" class="form-control" name="subject" placeholder="Subject"
 								onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
@@ -183,10 +190,11 @@
 					</form>
 					{% if messages %}
 					{% for message in messages %}
-					<div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}</div>
+					<div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message|safe }}
+					</div>
 					{% endfor %}
 					{% endif %}
-	
+
 					{% if form.errors %}
 					<div class="alert alert-error">
 						<h4>Please fix the following errors</h4>
@@ -206,7 +214,7 @@
 					{% endif %}
 				</div>
 			</div>
-			
+
 			<div class="col-lg-4 sidebar-widgets">
 				<div class="widget-wrap">
 					<div class="single-sidebar-widget search-widget">

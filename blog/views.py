@@ -1,8 +1,12 @@
-from django.shortcuts import render , get_object_or_404
+from django.shortcuts import render , get_object_or_404, redirect
 from blog.models import Post,Comments 
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from blog.forms import commentsform
 from django.contrib import messages
+from django.urls import reverse
+from django.http import HttpResponseRedirect
+
+
 
 def blog_view(requests,cat_name=None,author_username = None,**kwargs):
     posts = Post.objects.filter(status=1)
@@ -25,8 +29,6 @@ def blog_view(requests,cat_name=None,author_username = None,**kwargs):
     return render(requests,'blog/blog-home.html',context)
 
 
-
-
 def blog_single(request,pid):
     if request.method == 'POST':
         form = commentsform(request.POST)
@@ -36,11 +38,15 @@ def blog_single(request,pid):
         else:
             messages.add_message(request,messages.ERROR,'your Comment didnt submited')
     posts = Post.objects.filter(status=1)
-    post = get_object_or_404(posts, pk=pid)
-    comments = Comments.objects.filter(post=post.id,approved= True)
-    form = commentsform()
-    context = {'post': post , 'comments': comments, 'form': form}
-    return render(request,'blog/blog-single.html',context)
+    post = get_object_or_404(posts,pk=pid)
+    if not post.login_required:
+        comments = Comments.objects.filter(post=post.id,approved= True)
+        form = commentsform()
+        context = {'post': post , 'comments': comments, 'form': form}
+        return render(request,'blog/blog-single.html',context)
+    else:
+        return HttpResponseRedirect(reverse('accounts:login'))
+
  
 def test(requests,pid):
     #post = Post.objects.get(id=pid)
