@@ -40,8 +40,13 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-sm-6 col-6 header-top-left">
                         <ul>
-                            <li><a href="#">Visit Us</a></li>
-                            <li><a href="#">Buy Tickets</a></li>
+                            {% if request.user.is_authenticated %}
+                            <li><a href="#">logged in as {{request.user.username}}</a></li>
+                            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                            {% else %}
+                            <li><a href="{% url 'accounts:login' %}">login</a></li>
+                            <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-6 header-top-right">
@@ -64,7 +69,7 @@
                     <ul class="nav-menu">
                         <li><a href="{% url 'website:index' %}">Home</a></li>
                         <li><a href="{% url 'website:about' %}">About</a></li>
-                                <li><a href="{% url 'blog:index' %}">Blog</a></li>
+                        <li><a href="{% url 'blog:index' %}">Blog</a></li>
                         </li>
                         <li class="menu-has-children"><a href="">Pages</a>
                             <ul>
@@ -134,14 +139,13 @@
                             output.
                         </p>
                         <div id="mc_embed_signup">
-                            <form
-                                action="{% url 'website:newsletter' %}"
-                                method="post" class="subscription relative">
+                            <form action="{% url 'website:newsletter' %}" method="post" class="subscription relative">
                                 {% csrf_token %}
                                 <div class="input-group d-flex flex-row">
                                     <input name="email" placeholder="Email Address" onfocus="this.placeholder = ''"
                                         onblur="this.placeholder = 'Email Address '" required="" type="email">
-                                    <button class="btn bb-btn" type='submit'><span class="lnr lnr-location"></span></button>
+                                    <button class="btn bb-btn" type='submit'><span
+                                            class="lnr lnr-location"></span></button>
                                 </div>
                                 <div class="mt-10 info"></div>
                             </form>
@@ -154,7 +158,7 @@
                         <ul class="instafeed d-flex flex-wrap">
                             <li><img src="{% static 'img/i1.jpg'%}" alt=""></li>
                             <li><img src="{% static 'img/i2.jpg'%}" alt=""></li>
-                            <li><img src="{% static 'img/i3.jpg'%}" alt=""></li> 
+                            <li><img src="{% static 'img/i3.jpg'%}" alt=""></li>
                             <li><img src="{% static 'img/i4.jpg'%}" alt=""></li>
                             <li><img src="{% static 'img/i5.jpg'%}" alt=""></li>
                             <li><img src="{% static 'img/i6.jpg'%}" alt=""></li>
@@ -198,4 +202,5 @@
     <script src="{% static 'js/mail-script.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
 </body>
+
 </html>
