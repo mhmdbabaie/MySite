@@ -1,4 +1,4 @@
-from django.shortcuts import render , get_object_or_404, redirect
+from django.shortcuts import render , get_object_or_404,redirect
 from blog.models import Post,Comments 
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from blog.forms import commentsform
